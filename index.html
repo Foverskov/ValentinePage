@@ -20,20 +20,20 @@
       </header>
 
       <section class="screen is-active" id="screen-question" aria-labelledby="question-title">
-        <h1 class="title" id="question-title">Vil du være min valentine Boo?</h1>
+        <h1 class="title" id="question-title">Vil du være min valentines date Boo?</h1>
         <p class="lead">Så har jeg en lille udfording til dig!</p>
         <div class="actions">
-          <button class="btn btn-primary" id="yes-button" type="button">Yes</button>
-          <button class="btn btn-secondary" id="no-button" type="button">No</button>
+          <button class="btn btn-primary" id="yes-button" type="button">Ja</button>
+          <button class="btn btn-secondary" id="no-button" type="button">Nej</button>
         </div>
         <p class="hint" id="no-feedback" hidden>🥲</p>
       </section>
 
       <section class="screen" id="screen-puzzle" aria-labelledby="puzzle-title">
         <h2 class="title title--small" id="puzzle-title">Captcha challenge</h2>
-        <p class="lead">
+        <!-- <p class="lead">
           Tap one tile, then another tile, to rebuild the photo.
-        </p>
+        </p> -->
 
         <div class="puzzle-wrap">
           <div
@@ -45,7 +45,7 @@
           ></div>
         </div>
 
-        <p class="hint" id="puzzle-status">Tap one tile, then tap another tile to swap.</p>
+        <p class="hint" id="puzzle-status">Klik på et felt efterfulgt af et andet, så skifter de to brikker plads</p>
         <div class="actions actions--stack">
           <button class="btn btn-secondary" id="shuffle-button" type="button">Shuffle</button>
           <button class="btn btn-primary" id="continue-button" type="button" disabled>Continue</button>
@@ -53,8 +53,8 @@
       </section>
 
       <section class="screen" id="screen-video" aria-labelledby="video-title">
-        <h2 class="title title--small" id="video-title">Et lille klip af os</h2>
-        <p class="lead">Se videoen eller tryk spring over.</p>
+        <h2 class="title title--small" id="video-title">Video hilsen</h2>
+        <p class="lead"></p>
 
         <div class="video-wrap">
           <video
@@ -63,7 +63,7 @@
             controls
             playsinline
             preload="metadata"
-            src="assets/78850296-8AE5-451A-BCBF-350B846D25C1.MP4"
+            src="assets/videohilsen.mp4"
           ></video>
         </div>
 
@@ -75,12 +75,12 @@
 
       <section class="screen" id="screen-gallery" aria-labelledby="gallery-title">
         <h2 class="title title--small" id="gallery-title">5 ting jeg er taknemmelig for</h2>
-        <p class="lead">Lige fem hurtige grunde til, at du betyder alt for mig.</p>
+
 
         <div class="gratitude-cards" id="gratitude-cards" aria-label="Fem taknemmelighedskort"></div>
 
         <div class="actions">
-          <button class="btn btn-secondary" id="restart-button" type="button">Play again</button>
+          <button class="btn btn-secondary" id="restart-button" type="button">Start forfra</button>
         </div>
       </section>
     </main>

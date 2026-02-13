@@ -173,7 +173,7 @@
     continueButton.disabled = true;
     puzzleBoard.classList.remove("is-solved");
     puzzleStatus.dataset.state = "idle";
-    puzzleStatus.textContent = "Tap one tile, then tap another tile to swap.";
+    puzzleStatus.textContent = "";
     renderBoard();
   }
 
@@ -186,7 +186,7 @@
     if (selected === null) {
       selected = tileIndex;
       puzzleStatus.dataset.state = "idle";
-      puzzleStatus.textContent = "Tile selected. Tap another tile to swap.";
+      puzzleStatus.textContent = "Brik valgt. Tryk på en anden brik for at bytte.";
       renderBoard();
       return;
     }
@@ -194,7 +194,7 @@
     if (selected === tileIndex) {
       selected = null;
       puzzleStatus.dataset.state = "idle";
-      puzzleStatus.textContent = "Selection cleared. Tap one tile to choose again.";
+      puzzleStatus.textContent = "Valg ryddet. Tryk på en brik for at vælge igen.";
       renderBoard();
       return;
     }
@@ -208,12 +208,12 @@
       continueButton.disabled = false;
       puzzleBoard.classList.add("is-solved");
       puzzleStatus.dataset.state = "done";
-      puzzleStatus.textContent = `Puzzle solved in ${moves} move${moves === 1 ? "" : "s"}. Continue unlocked.`;
+      puzzleStatus.textContent = `Puslespil løst på ${moves} træk. Fortsæt er nu låst op.`;
       return;
     }
 
     puzzleStatus.dataset.state = "idle";
-    puzzleStatus.textContent = `${moves} move${moves === 1 ? "" : "s"} made. Keep going.`;
+    puzzleStatus.textContent = `${moves} træk lavet. Bliv ved!`;
   }
 
   yesButton.addEventListener("click", () => {
