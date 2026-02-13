@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f26d8d" />
+    <title>Valentine Surprise</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <main class="app-shell" aria-live="polite">
+      <header class="top-bar">
+        <p class="tag">Private invite</p>
+        <div class="progress" aria-hidden="true">
+          <span class="progress-dot progress-dot--active"></span>
+          <span class="progress-dot"></span>
+          <span class="progress-dot"></span>
+        </div>
+      </header>
+
+      <section class="screen is-active" id="screen-question" aria-labelledby="question-title">
+        <h1 class="title" id="question-title">Will you be my valentine?</h1>
+        <p class="lead">One tiny challenge unlocks your surprise.</p>
+        <div class="actions">
+          <button class="btn btn-primary" id="yes-button" type="button">Yes</button>
+          <button class="btn btn-secondary" id="no-button" type="button">No</button>
+        </div>
+        <p class="hint" id="no-feedback" hidden>This page only works with yes.</p>
+      </section>
+
+      <section class="screen" id="screen-puzzle" aria-labelledby="puzzle-title">
+        <h2 class="title title--small" id="puzzle-title">Captcha challenge</h2>
+        <p class="lead">
+          Tap one tile, then another tile, to rebuild the photo.
+        </p>
+
+        <div class="puzzle-wrap">
+          <div
+            class="puzzle-board"
+            id="puzzle-board"
+            role="group"
+            aria-label="Photo puzzle board"
+            style="--puzzle-image: url('assets/us-puzzle.svg')"
+          ></div>
+        </div>
+
+        <p class="hint" id="puzzle-status">Tap one tile, then tap another tile to swap.</p>
+        <div class="actions actions--stack">
+          <button class="btn btn-secondary" id="shuffle-button" type="button">Shuffle</button>
+          <button class="btn btn-primary" id="continue-button" type="button" disabled>Continue</button>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-gallery" aria-labelledby="gallery-title">
+        <h2 class="title title--small" id="gallery-title">For you</h2>
+        <p class="lead">A few favorite moments and one short note.</p>
+
+        <div class="gallery" aria-label="Photo memories">
+          <figure class="memory-card">
+            <img src="assets/photo-1.svg" alt="Memory placeholder 1" loading="lazy" />
+          </figure>
+          <figure class="memory-card">
+            <img src="assets/photo-2.svg" alt="Memory placeholder 2" loading="lazy" />
+          </figure>
+          <figure class="memory-card">
+            <img src="assets/photo-3.svg" alt="Memory placeholder 3" loading="lazy" />
+          </figure>
+        </div>
+
+        <article class="note">
+          Thank you for being my favorite person to laugh with, travel with, and build life with.
+          This is one more reason I choose you every day.
+        </article>
+
+        <div class="actions">
+          <button class="btn btn-secondary" id="restart-button" type="button">Play again</button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

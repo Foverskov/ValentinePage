@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Replace with your photo</title>
+  <desc id="desc">Placeholder image for the puzzle. Replace this file with your own photo named us-puzzle.jpg or update the path in index.html.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffe4d5"/>
+      <stop offset="60%" stop-color="#ffc6c7"/>
+      <stop offset="100%" stop-color="#ffafc6"/>
+    </linearGradient>
+    <linearGradient id="silhouette" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#70475d"/>
+      <stop offset="100%" stop-color="#422437"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="1200" fill="url(#sky)"/>
+
+  <g opacity="0.28" fill="#fff7f2" filter="url(#soft)">
+    <circle cx="280" cy="250" r="190"/>
+    <circle cx="920" cy="230" r="170"/>
+    <circle cx="980" cy="910" r="220"/>
+  </g>
+
+  <g opacity="0.2" stroke="#ffffff" stroke-width="7" fill="none">
+    <path d="M80 820 Q 320 610 570 830"/>
+    <path d="M620 830 Q 840 620 1120 840"/>
+    <path d="M140 560 Q 390 430 640 560"/>
+  </g>
+
+  <g transform="translate(170,320)">
+    <ellipse cx="220" cy="520" rx="220" ry="180" fill="rgba(255,255,255,0.27)"/>
+    <ellipse cx="560" cy="530" rx="240" ry="190" fill="rgba(255,255,255,0.24)"/>
+
+    <path d="M104 410 C 114 240 215 190 270 215 C 327 240 341 375 324 505 C 310 620 299 670 208 694 C 130 713 87 655 92 596 C 94 559 98 470 104 410 Z" fill="url(#silhouette)"/>
+    <path d="M438 421 C 442 281 525 215 600 234 C 677 253 734 357 737 493 C 741 636 676 713 580 713 C 483 713 430 636 433 563 C 434 521 436 470 438 421 Z" fill="url(#silhouette)"/>
+
+    <path d="M287 468 C 326 434 379 433 418 466 C 447 492 465 520 492 545" stroke="#f9d4d6" stroke-width="22" stroke-linecap="round" fill="none" opacity="0.75"/>
+  </g>
+
+  <g font-family="Avenir, Helvetica, sans-serif" text-anchor="middle">
+    <text x="600" y="108" font-size="44" fill="#7f4b64" opacity="0.9">Swap this file with your real photo</text>
+  </g>
+</svg>
