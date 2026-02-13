@@ -374,6 +374,8 @@ body::after {
 .modal__panel {
   position: relative;
   width: min(100%, 420px);
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
   border-radius: 18px;
   background: #fff8f6;
   border: 1px solid rgba(97, 52, 74, 0.2);
