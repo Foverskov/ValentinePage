@@ -1,36 +1,43 @@
 {
   "grin": {
-    "cardLabel": "Dit grin",
-    "title": "Dit grin",
-    "text": "Dit grin smitter hver eneste gang, og det gør selv en helt almindelig dag til noget, jeg glæder mig over.",
+    "cardLabel": "Din kærlighed",
+    "title": "Din kærlighed og omsorg",
+    "text": "Du har vist mig hvad ægte kærlighed er. Jeg er taknemmelig for din evne til at kommunikere din kærlighed og skabe tryghed med din uendelige omsorg! Du har skabt et fundament for at vi kan vokse som mennesker og stå stærkere end nogensinde før. Tak for at være have så smuk en sjæl.",
     "imageSrc": "assets/IMG_9266.JPG",
     "imageAlt": "Et smilende øjeblik sammen"
   },
   "omsorg": {
-    "cardLabel": "Din omsorg",
-    "title": "Din omsorg",
-    "text": "Du passer på os på den fineste måde, og jeg mærker altid, at du vil mig det godt.",
+    "cardLabel": "Din comedy skills",
+    "title": "Din comedy skills",
+    "text": "Jeg er taknemmelig for at du er så fååårking grineren skat. En hver tid med dig er kærlig og sjov! Tak for at være sjov.",
     "imageSrc": "assets/IMG_9267.JPG",
     "imageAlt": "Et roligt øjeblik med omsorg"
   },
   "eventyr": {
-    "cardLabel": "Vores eventyr",
-    "title": "Vores eventyr",
-    "text": "Det bedste er, at selv de små planer med dig føles som eventyr, jeg aldrig har lyst til at stoppe.",
-    "imageSrc": "assets/IMG_9287.JPG",
+    "cardLabel": "Vores dates og eventyr",
+    "title": "Vores dates og eventyr",
+    "text": "Jeg er taknemmelig for vores små eventyr, om end de har været i køkkenet, på udflugt efter fastelavnsboller, ture i biograffen, musik med Heine, Kreativ udfoldelse, dybdegående analyser af generatore eller bare en random køretur til og fra tølløse. Tak for at være min chosen eventyr partner, jeg glæder mig til fremtide dates og eventyr stor som små!",
+    "imageSrc": "assets/ardScore.JPG",
     "imageAlt": "Et eventyrligt øjeblik sammen"
   },
   "styrke": {
-    "cardLabel": "Din styrke",
-    "title": "Din styrke",
-    "text": "Du er stærk og vedholdende, og det inspirerer mig til at være mere modig i alt, jeg gør.",
-    "imageSrc": "assets/IMG_9289.JPG",
+    "cardLabel": "Din Cheekiness og vores sex",
+    "title": "Din Cheekiness og vores love making",
+    "text": "Den er simpel. Jeg ELSKER at være nøgen med dig, og jeg elsker din Cheekiness, og umiddelbarhed! Tak for at være så så lækker en snack.",
+    "imageSrc": "assets/cheeky.JPG",
+    "imageAlt": "Et stærkt og gladt øjeblik"
+  },
+  "morgner": {
+    "cardLabel": "Vores Chill morgener",
+    "title": "Vores Chill morgener",
+    "text": "Der findes absolut intet bedre en vågne ved siden af dig, uden at skulle tage stilling til hvad dagen bringer. Det er definitionen af inner peace i min bog. Tak for at skabe ro i min sjæl.",
+    "imageSrc": "assets/Drawings/bed.JPG",
     "imageAlt": "Et stærkt og gladt øjeblik"
   },
   "os": {
-    "cardLabel": "Os to",
-    "title": "Os to",
-    "text": "Jeg er taknemmelig for os to, for roen, grinene og alt det vi bygger sammen.",
+    "cardLabel": "Os to som et hold",
+    "title": "Os to som et hold",
+    "text": "Jeg er taknemmelig for at vi ikke blot føles som kærester, men som et hold. Et hold der skal udforske og kan erobre hele verden. Jeg glæder mig fårrking meget til at se hvad fremtiden bringer skat!",
     "imageSrc": "assets/IMG_1093.JPG",
     "imageAlt": "Os to sammen"
   }

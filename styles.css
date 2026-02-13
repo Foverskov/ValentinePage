@@ -405,8 +405,8 @@ body::after {
   margin: 12px 0 0;
   border-radius: 12px;
   border: 1px solid rgba(97, 52, 74, 0.16);
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  /*aspect-ratio: 4 / 3;*/
+  object-fit: contain;
 }
 
 .modal__title {
