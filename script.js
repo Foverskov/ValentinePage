@@ -4,6 +4,7 @@
 
   const screenQuestion = document.getElementById("screen-question");
   const screenPuzzle = document.getElementById("screen-puzzle");
+  const screenVideo = document.getElementById("screen-video");
   const screenGallery = document.getElementById("screen-gallery");
 
   const yesButton = document.getElementById("yes-button");
@@ -14,13 +15,52 @@
   const puzzleStatus = document.getElementById("puzzle-status");
   const shuffleButton = document.getElementById("shuffle-button");
   const continueButton = document.getElementById("continue-button");
+  const memoryVideo = document.getElementById("memory-video");
+  const skipVideoButton = document.getElementById("skip-video-button");
+  const toCardsButton = document.getElementById("to-cards-button");
   const restartButton = document.getElementById("restart-button");
+  const gratitudeCards = document.getElementById("gratitude-cards");
+  const gratitudeModal = document.getElementById("gratitude-modal");
+  const modalImage = document.getElementById("modal-image");
+  const modalTitle = document.getElementById("modal-title");
+  const modalBody = document.getElementById("modal-body");
+  const modalCloseButton = document.getElementById("modal-close-button");
 
   const dots = Array.from(document.querySelectorAll(".progress-dot"));
+  let gratitudeContent = {};
 
   let pieces = [];
   let selected = null;
   let moves = 0;
+  let lastFocusedCard = null;
+
+  async function loadGratitudeContent() {
+    try {
+      const response = await fetch("gratitude-content.json", { cache: "no-store" });
+      if (!response.ok) {
+        throw new Error(`Failed to load gratitude-content.json (${response.status})`);
+      }
+
+      const data = await response.json();
+      gratitudeContent = data || {};
+      renderGratitudeCards();
+    } catch (error) {
+      console.error(error);
+      gratitudeCards.innerHTML = '<p class="hint">Kunne ikke hente kortdata lige nu.</p>';
+    }
+  }
+
+  function renderGratitudeCards() {
+    gratitudeCards.innerHTML = "";
+    Object.entries(gratitudeContent).forEach(([key, content]) => {
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "gratitude-card";
+      card.dataset.gratitude = key;
+      card.textContent = content.cardLabel || content.title || key;
+      gratitudeCards.appendChild(card);
+    });
+  }
 
   function createSortedPieces() {
     return Array.from({ length: tileCount }, (_, index) => index);
@@ -60,6 +100,7 @@
     const screenMap = {
       question: screenQuestion,
       puzzle: screenPuzzle,
+      video: screenVideo,
       gallery: screenGallery
     };
 
@@ -70,7 +111,37 @@
 
     if (screenId === "question") setProgress(0);
     if (screenId === "puzzle") setProgress(1);
-    if (screenId === "gallery") setProgress(2);
+    if (screenId === "video") setProgress(2);
+    if (screenId === "gallery") setProgress(3);
+  }
+
+  function openModal(contentKey, sourceElement) {
+    const content = gratitudeContent[contentKey];
+    if (!content) return;
+
+    lastFocusedCard = sourceElement || null;
+    modalTitle.textContent = content.title;
+    modalBody.textContent = content.text;
+    if (content.imageSrc) {
+      modalImage.src = content.imageSrc;
+      modalImage.alt = content.imageAlt || content.title || "";
+      modalImage.hidden = false;
+    } else {
+      modalImage.removeAttribute("src");
+      modalImage.alt = "";
+      modalImage.hidden = true;
+    }
+    gratitudeModal.hidden = false;
+    document.body.classList.add("modal-open");
+    modalCloseButton.focus();
+  }
+
+  function closeModal() {
+    gratitudeModal.hidden = true;
+    document.body.classList.remove("modal-open");
+    if (lastFocusedCard) {
+      lastFocusedCard.focus();
+    }
   }
 
   function renderBoard() {
@@ -160,15 +231,53 @@
   });
 
   continueButton.addEventListener("click", () => {
+    showScreen("video");
+    memoryVideo.currentTime = 0;
+    memoryVideo.play().catch(() => {});
+  });
+
+  skipVideoButton.addEventListener("click", () => {
+    memoryVideo.pause();
+    showScreen("gallery");
+  });
+
+  toCardsButton.addEventListener("click", () => {
+    memoryVideo.pause();
+    showScreen("gallery");
+  });
+
+  memoryVideo.addEventListener("ended", () => {
     showScreen("gallery");
   });
 
   restartButton.addEventListener("click", () => {
+    if (!gratitudeModal.hidden) {
+      closeModal();
+    }
+    memoryVideo.pause();
+    memoryVideo.currentTime = 0;
     showScreen("question");
     noFeedback.hidden = true;
   });
 
   puzzleBoard.addEventListener("click", handleBoardTap);
+  gratitudeCards.addEventListener("click", (event) => {
+    const card = event.target.closest("[data-gratitude]");
+    if (!card) return;
+    openModal(card.dataset.gratitude, card);
+  });
 
+  gratitudeModal.addEventListener("click", (event) => {
+    if (event.target.closest("[data-modal-close]")) closeModal();
+  });
+  modalCloseButton.addEventListener("click", closeModal);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !gratitudeModal.hidden) {
+      closeModal();
+    }
+  });
+
+  loadGratitudeContent();
   showScreen("question");
 })();

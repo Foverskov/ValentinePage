@@ -11,9 +11,9 @@
   <body>
     <main class="app-shell" aria-live="polite">
       <header class="top-bar">
-        <p class="tag">Private invite</p>
         <div class="progress" aria-hidden="true">
           <span class="progress-dot progress-dot--active"></span>
+          <span class="progress-dot"></span>
           <span class="progress-dot"></span>
           <span class="progress-dot"></span>
         </div>
@@ -41,7 +41,7 @@
             id="puzzle-board"
             role="group"
             aria-label="Photo puzzle board"
-            style="--puzzle-image: url('assets/us-puzzle.svg')"
+            style="--puzzle-image: url('assets/Puzzle1.jpg')"
           ></div>
         </div>
 
@@ -52,31 +52,49 @@
         </div>
       </section>
 
-      <section class="screen" id="screen-gallery" aria-labelledby="gallery-title">
-        <h2 class="title title--small" id="gallery-title">For you</h2>
-        <p class="lead">A few favorite moments and one short note.</p>
+      <section class="screen" id="screen-video" aria-labelledby="video-title">
+        <h2 class="title title--small" id="video-title">Et lille klip af os</h2>
+        <p class="lead">Se videoen eller tryk spring over.</p>
 
-        <div class="gallery" aria-label="Photo memories">
-          <figure class="memory-card">
-            <img src="assets/photo-1.svg" alt="Memory placeholder 1" loading="lazy" />
-          </figure>
-          <figure class="memory-card">
-            <img src="assets/photo-2.svg" alt="Memory placeholder 2" loading="lazy" />
-          </figure>
-          <figure class="memory-card">
-            <img src="assets/photo-3.svg" alt="Memory placeholder 3" loading="lazy" />
-          </figure>
+        <div class="video-wrap">
+          <video
+            id="memory-video"
+            class="memory-video"
+            controls
+            playsinline
+            preload="metadata"
+            src="assets/78850296-8AE5-451A-BCBF-350B846D25C1.MP4"
+          ></video>
         </div>
 
-        <article class="note">
-          Thank you for being my favorite person to laugh with, travel with, and build life with.
-          This is one more reason I choose you every day.
-        </article>
+        <div class="actions actions--stack">
+          <button class="btn btn-secondary" id="skip-video-button" type="button">Spring over</button>
+          <button class="btn btn-primary" id="to-cards-button" type="button">Videre til kortene</button>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-gallery" aria-labelledby="gallery-title">
+        <h2 class="title title--small" id="gallery-title">5 ting jeg er taknemmelig for</h2>
+        <p class="lead">Lige fem hurtige grunde til, at du betyder alt for mig.</p>
+
+        <div class="gratitude-cards" id="gratitude-cards" aria-label="Fem taknemmelighedskort"></div>
 
         <div class="actions">
           <button class="btn btn-secondary" id="restart-button" type="button">Play again</button>
         </div>
       </section>
     </main>
+
+    <div class="modal" id="gratitude-modal" hidden>
+      <div class="modal__backdrop" data-modal-close></div>
+      <section class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal__close" id="modal-close-button" data-modal-close type="button" aria-label="Luk">
+          Luk
+        </button>
+        <img class="modal__image" id="modal-image" alt="" hidden />
+        <h3 class="modal__title" id="modal-title"></h3>
+        <p class="modal__body" id="modal-body"></p>
+      </section>
+    </div>
   </body>
 </html>

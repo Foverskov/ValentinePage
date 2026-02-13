@@ -1,0 +1,37 @@
+{
+  "grin": {
+    "cardLabel": "Dit grin",
+    "title": "Dit grin",
+    "text": "Dit grin smitter hver eneste gang, og det gør selv en helt almindelig dag til noget, jeg glæder mig over.",
+    "imageSrc": "assets/IMG_9266.JPG",
+    "imageAlt": "Et smilende øjeblik sammen"
+  },
+  "omsorg": {
+    "cardLabel": "Din omsorg",
+    "title": "Din omsorg",
+    "text": "Du passer på os på den fineste måde, og jeg mærker altid, at du vil mig det godt.",
+    "imageSrc": "assets/IMG_9267.JPG",
+    "imageAlt": "Et roligt øjeblik med omsorg"
+  },
+  "eventyr": {
+    "cardLabel": "Vores eventyr",
+    "title": "Vores eventyr",
+    "text": "Det bedste er, at selv de små planer med dig føles som eventyr, jeg aldrig har lyst til at stoppe.",
+    "imageSrc": "assets/IMG_9287.JPG",
+    "imageAlt": "Et eventyrligt øjeblik sammen"
+  },
+  "styrke": {
+    "cardLabel": "Din styrke",
+    "title": "Din styrke",
+    "text": "Du er stærk og vedholdende, og det inspirerer mig til at være mere modig i alt, jeg gør.",
+    "imageSrc": "assets/IMG_9289.JPG",
+    "imageAlt": "Et stærkt og gladt øjeblik"
+  },
+  "os": {
+    "cardLabel": "Os to",
+    "title": "Os to",
+    "text": "Jeg er taknemmelig for os to, for roen, grinene og alt det vi bygger sammen.",
+    "imageSrc": "assets/IMG_1093.JPG",
+    "imageAlt": "Os to sammen"
+  }
+}
