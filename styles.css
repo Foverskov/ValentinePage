@@ -209,6 +209,7 @@ body::after {
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.68);
   border: 1px solid var(--line);
+  display: grid;
 }
 
 .puzzle-board {
@@ -216,11 +217,43 @@ body::after {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
+  transition: opacity 360ms ease, transform 360ms ease, filter 360ms ease;
+}
+
+.puzzle-board.is-solved {
+  animation: solved-glow 620ms ease;
+}
+
+.puzzle-board,
+.puzzle-reveal {
+  grid-area: 1 / 1;
   width: 100%;
   aspect-ratio: 1 / 1;
 }
 
-.puzzle-board.is-solved {
+.puzzle-reveal {
+  border-radius: var(--radius-md);
+  background-image: var(--puzzle-image);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0 10px 20px -14px rgba(39, 19, 28, 0.75);
+  opacity: 0;
+  transform: scale(0.97);
+  transition: opacity 420ms ease, transform 420ms ease;
+  pointer-events: none;
+}
+
+.puzzle-wrap.is-revealed .puzzle-board {
+  opacity: 0;
+  transform: scale(1.02);
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.puzzle-wrap.is-revealed .puzzle-reveal {
+  opacity: 1;
+  transform: scale(1);
   animation: solved-glow 620ms ease;
 }
 
@@ -487,5 +520,15 @@ body.modal-open {
     animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 1ms !important;
+  }
+
+  .puzzle-wrap.is-revealed .puzzle-board {
+    opacity: 0;
+    transform: none;
+    filter: none;
+  }
+
+  .puzzle-wrap.is-revealed .puzzle-reveal {
+    transform: none;
   }
 }

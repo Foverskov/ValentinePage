@@ -11,6 +11,7 @@
   const noButton = document.getElementById("no-button");
   const noFeedback = document.getElementById("no-feedback");
 
+  const puzzleWrap = document.getElementById("puzzle-wrap");
   const puzzleBoard = document.getElementById("puzzle-board");
   const puzzleStatus = document.getElementById("puzzle-status");
   const shuffleButton = document.getElementById("shuffle-button");
@@ -218,6 +219,16 @@
     });
   }
 
+  function setPuzzleSolvedState(solved) {
+    puzzleWrap.classList.toggle("is-revealed", solved);
+    puzzleBoard.classList.toggle("is-solved", solved);
+    if (solved) {
+      puzzleBoard.setAttribute("aria-disabled", "true");
+      return;
+    }
+    puzzleBoard.removeAttribute("aria-disabled");
+  }
+
   function showScreen(screenId) {
     const screenMap = {
       question: screenQuestion,
@@ -296,13 +307,15 @@
     selected = null;
     moves = 0;
     continueButton.disabled = true;
-    puzzleBoard.classList.remove("is-solved");
+    setPuzzleSolvedState(false);
     puzzleStatus.dataset.state = "idle";
     puzzleStatus.textContent = "";
     renderBoard();
   }
 
   function handleBoardTap(event) {
+    if (puzzleWrap.classList.contains("is-revealed")) return;
+
     const tile = event.target.closest(".puzzle-tile");
     if (!tile) return;
 
@@ -331,7 +344,7 @@
 
     if (isSolved(pieces)) {
       continueButton.disabled = false;
-      puzzleBoard.classList.add("is-solved");
+      setPuzzleSolvedState(true);
       puzzleStatus.dataset.state = "done";
       puzzleStatus.textContent = `Puslespil løst på ${moves} træk. Fortsæt er nu låst op.`;
       return;
