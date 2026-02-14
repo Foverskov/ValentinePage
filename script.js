@@ -33,6 +33,125 @@
   let selected = null;
   let moves = 0;
   let lastFocusedCard = null;
+  const prefetchQueue = [];
+  const prefetchedImages = new Set();
+  const failedPrefetchImages = new Set();
+  const prefetchConcurrency = 2;
+  let prefetchInFlight = 0;
+  let prefetchStarted = false;
+  let prefetchPumpScheduled = false;
+
+  function scheduleIdle(task) {
+    if (typeof window.requestIdleCallback === "function") {
+      window.requestIdleCallback(task, { timeout: 1200 });
+      return;
+    }
+
+    window.setTimeout(task, 180);
+  }
+
+  function shouldPrefetchImages() {
+    const connection =
+      navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (!connection) return true;
+    if (connection.saveData) return false;
+    const effectiveType = String(connection.effectiveType || "").toLowerCase();
+    return !effectiveType.includes("2g");
+  }
+
+  function collectGratitudeImageSources() {
+    return Array.from(
+      new Set(
+        Object.values(gratitudeContent)
+          .map((entry) => entry && entry.imageSrc)
+          .filter(Boolean)
+      )
+    );
+  }
+
+  function queueImagePrefetch(src, prioritize = false) {
+    if (!src) return;
+    if (prefetchedImages.has(src) || failedPrefetchImages.has(src)) return;
+    if (prefetchQueue.includes(src)) return;
+
+    if (prioritize) {
+      prefetchQueue.unshift(src);
+      return;
+    }
+    prefetchQueue.push(src);
+  }
+
+  function prefetchImage(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      let settled = false;
+
+      function settle(success) {
+        if (settled) return;
+        settled = true;
+        img.onload = null;
+        img.onerror = null;
+        if (success) {
+          resolve();
+          return;
+        }
+        reject(new Error(`Failed to prefetch ${src}`));
+      }
+
+      img.onload = () => settle(true);
+      img.onerror = () => settle(false);
+      img.src = src;
+
+      if (typeof img.decode === "function") {
+        img.decode().then(() => settle(true)).catch(() => {});
+      }
+    });
+  }
+
+  function schedulePrefetchPump() {
+    if (prefetchPumpScheduled) return;
+    prefetchPumpScheduled = true;
+
+    scheduleIdle(() => {
+      prefetchPumpScheduled = false;
+      pumpPrefetchQueue();
+    });
+  }
+
+  function pumpPrefetchQueue() {
+    while (prefetchInFlight < prefetchConcurrency && prefetchQueue.length > 0) {
+      const src = prefetchQueue.shift();
+      prefetchInFlight += 1;
+
+      prefetchImage(src)
+        .then(() => {
+          prefetchedImages.add(src);
+        })
+        .catch(() => {
+          failedPrefetchImages.add(src);
+        })
+        .finally(() => {
+          prefetchInFlight -= 1;
+          if (prefetchQueue.length > 0) {
+            schedulePrefetchPump();
+          }
+        });
+    }
+  }
+
+  function startGratitudeImagePrefetch() {
+    if (prefetchStarted) return;
+    if (!shouldPrefetchImages()) return;
+
+    const sources = collectGratitudeImageSources();
+    if (sources.length === 0) return;
+
+    prefetchStarted = true;
+    const [first, ...rest] = sources;
+    queueImagePrefetch(first, true);
+    rest.forEach((src) => queueImagePrefetch(src));
+    schedulePrefetchPump();
+  }
 
   async function loadGratitudeContent() {
     try {
@@ -44,6 +163,9 @@
       const data = await response.json();
       gratitudeContent = data || {};
       renderGratitudeCards();
+      if (screenGallery.classList.contains("is-active")) {
+        startGratitudeImagePrefetch();
+      }
     } catch (error) {
       console.error(error);
       gratitudeCards.innerHTML = '<p class="hint">Kunne ikke hente kortdata lige nu.</p>';
@@ -112,7 +234,10 @@
     if (screenId === "question") setProgress(0);
     if (screenId === "puzzle") setProgress(1);
     if (screenId === "video") setProgress(2);
-    if (screenId === "gallery") setProgress(3);
+    if (screenId === "gallery") {
+      setProgress(3);
+      startGratitudeImagePrefetch();
+    }
   }
 
   function openModal(contentKey, sourceElement) {
